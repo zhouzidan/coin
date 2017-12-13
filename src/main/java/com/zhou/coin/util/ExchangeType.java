@@ -7,28 +7,30 @@ import org.knowm.xchange.gateio.GateioExchange;
  */
 public enum ExchangeType {
 
-    GateIo(GateioExchange.class.getName());
+    GateIo(GateioExchange.class);
 //    Binance(BinanceEx);
 
-    private String className;
+    private Class exchangeClass;
     private String accessKeyName;
     private String sercetKeyName;
 
-    ExchangeType(String className) {
-        this.className = className;
-        this.accessKeyName = className + "_access_key";
-        this.sercetKeyName = className + "_secret_key";
+    ExchangeType(Class exchangeClass) {
+        this.exchangeClass = exchangeClass;
+        this.accessKeyName = exchangeClass.getSimpleName() + "_access_key";
+        this.sercetKeyName = exchangeClass.getSimpleName() + "_secret_key";
     }
 
     public String getClassName() {
-        return className;
+        return exchangeClass.getName();
     }
 
     public String getAccessKeyName() {
+        System.out.println("accessKeyName:"+accessKeyName);
         return accessKeyName;
     }
 
     public String getSercetKeyName() {
+        System.out.println("sercetKeyName:"+sercetKeyName);
         return sercetKeyName;
     }
 }

@@ -1,12 +1,16 @@
 package com.zhou.coin.manager;
 
 import com.zhou.coin.util.ExchangeType;
+import com.zhou.coin.util.Utils;
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 交易对象
+ */
 public class ExchangeManager {
     private static Map<ExchangeType,Exchange> exchangeMap = new HashMap<ExchangeType, Exchange>();
 
@@ -17,10 +21,12 @@ public class ExchangeManager {
      */
     public static Exchange getExchange(ExchangeType type){
         if (exchangeMap.containsKey(type) == false) {
+            String accessKey = Utils.getProperty(type.getAccessKeyName());
+            String sercetKey = Utils.getProperty(type.getSercetKeyName());
             Exchange exchange = ExchangeFactory.INSTANCE.createExchangeWithApiKeys(
                     type.getClassName()
-                    ,type.getAccessKeyName()
-                    ,type.getSercetKeyName()
+                    ,accessKey
+                    ,sercetKey
             );
             exchangeMap.put(type,exchange);
         }
