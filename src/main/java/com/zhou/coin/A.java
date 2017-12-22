@@ -59,7 +59,7 @@ public class A {
 
     // USDT BTC ETH
     private static CurrencyPair getCurrencyPair(Currency last , Currency current){
-        CurrencyPair currencyPair;
+        CurrencyPair currencyPair = null;
         if (last.equals(Currency.USDT)){
             currencyPair = new CurrencyPair(current,last);
         }else if (current.equals(Currency.USDT)){
